@@ -19,21 +19,21 @@ const inputData = [
     id: 20,
     parent_id: null,
   },
-  //   {
-  //     name: "Women Accessories",
-  //     id: 2,
-  //     parent_id: 23,
-  //   },
-  //   {
-  //     name: "Women Watches",
-  //     id: 60,
-  //     parent_id: 2,
-  //   },
-  //   {
-  //     name: "Women",
-  //     id: 23,
-  //     parent_id: null,
-  //   },
+  {
+    name: "Women Accessories",
+    id: 2,
+    parent_id: 23,
+  },
+  {
+    name: "Women Watches",
+    id: 60,
+    parent_id: 2,
+  },
+  {
+    name: "Women",
+    id: 23,
+    parent_id: null,
+  },
 ];
 const outputData = [
   {
@@ -41,112 +41,88 @@ const outputData = [
     id: 20,
     parent_id: null,
   },
-  //   {
-  //     name: "Women",
-  //     id: 23,
-  //     parent_id: null,
-  //   },
+  {
+    name: "Women",
+    id: 23,
+    parent_id: null,
+  },
   {
     name: "Accessories",
     id: 1,
     parent_id: 20,
   },
-  //   {
-  //     name: "Women Accessories",
-  //     id: 2,
-  //     parent_id: 23,
-  //   },
+  {
+    name: "Women Accessories",
+    id: 2,
+    parent_id: 23,
+  },
   {
     name: "Watches",
     id: 57,
     parent_id: 1,
   },
-  //   {
-  //     name: "Women Watches",
-  //     id: 60,
-  //     parent_id: 2,
-  //   },
+  {
+    name: "Women Watches",
+    id: 60,
+    parent_id: 2,
+  },
 ];
 
 //start
-console.log(sortCategoriesForInsert());
+console.log(sortCategoriesForInsert(inputData));
 
-function sortParents(inputData) {
-  const parentList = [];
-  const childList = [];
+function initLookupMap(inputData) {
   //this map is used to quickly reference each childs parent id, lets us iterate once through input array
-  const indexMap = [];
-  inputData.forEach((val, index) => {
-    if (val.parent_id === null) {
-      parentList.push(val);
+  const indexMap = inputData.reduce((accumulator, element, index) => {
+    accumulator[element.id] = index;
+    element.children = [];
+    return accumulator;
+  }, {});
+  return indexMap;
+}
+
+function sortCategoriesForInsert(inputData) {
+  const indexMap = initLookupMap(inputData);
+  let listOfTrees = createListOfTrees(inputData, indexMap);
+  let treesOutput = listOfTrees
+    .map((val) => {
+      return getCategoryOutput(val);
+    })
+    .flat();
+  return treesOutput;
+}
+
+function createListOfTrees(inputData, indexMap) {
+  let listOfTrees = [];
+  //our lookup map serves to save time here.
+  inputData.forEach((val) => {
+    let parent_id = val.parent_id;
+    if (parent_id === null) {
+      listOfTrees.push(val);
     } else {
-      childList.push(val);
+      inputData[indexMap[parent_id]].children.push(val);
     }
-    indexMap[val.id] = index;
   });
-  return [parentList, childList, indexMap];
-}
-
-function sortCategoriesForInsert() {
-  const [parentList, childList, indexMap] = sortParents(inputData);
-
-  let listOfTrees = list_to_tree(inputData);
-  //   parentList.forEach(parent => {
-  //     listOfTrees.push(createTree(parent, childList, indexMap));
-  //   });
-
-  //   let output = createCategoryOuput(listOfTrees, console.log);
-  return output;
-}
-
-// function createTree(parent, childList, indexMap) {
-//     let outputTree = parent;
-//     childList.forEach((e) => {
-//       //find parent element with our map
-//       const parentElement = inputData[indexMap[e.parent_id]];
-//       // Add our current el to its parent's `children` array
-//       parentElement.children = [...(parentElement.children || []), e];
-//     });
-//     return outputTree;
-// }
-
-function list_to_tree(list) {
-  var map = {},
-    node,
-    roots = [],
-    i;
-
-  for (i = 0; i < list.length; i += 1) {
-    map[list[i].id] = i; // initialize the map
-    list[i].children = []; // initialize the children
-  }
-
-  for (i = 0; i < list.length; i += 1) {
-    node = list[i];
-    if (node.parentId !== "0") {
-      // if you have dangling branches check that map[node.parentId] exists
-      list[map[node.parentId]].children.push(node);
-    } else {
-      roots.push(node);
-    }
-  }
-  return roots;
+  return listOfTrees;
 }
 
 //Since we need to get category of parents before children are inserted
 //We use a breadth-first search
-function createCategoryOuput(starting, cb) {
-  const queue = [starting];
+function getCategoryOutput(startingNode) {
+  const visited = [];
+  const queue = [startingNode];
+
   while (queue.length) {
     const node = queue.shift();
-    cb(printOutput(node));
+    visited.push(cleanOutput(node));
     if (node.children) {
       queue.push(...node.children);
     }
   }
+  return visited;
 }
 
-function printOutput(node) {
+function cleanOutput(node) {
   return {
     name: node.name,
     id: node.id,
