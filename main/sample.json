@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Accessories",
+    "id": 1,
+    "parent_id": 20
+  },
+  {
+    "name": "Watches",
+    "id": 57,
+    "parent_id": 1
+  },
+  {
+    "name": "Men",
+    "id": 20,
+    "parent_id": null
+  },
+  {
+    "name": "Accessories",
+    "id": 2,
+    "parent_id": 23
+  },
+  {
+    "name": "Watches",
+    "id": 60,
+    "parent_id": 2
+  },
+  {
+    "name": "Women",
+    "id": 23,
+    "parent_id": null
+  }
+]
