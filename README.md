@@ -2,6 +2,8 @@
 
 ## High level algorithm
 
+*Note, I specifically did not do any empty/null/undefined checks on the input since I assumed the input would be complete as stated in specs.
+
 ### Lookup Map
 The idea here is to go with a first pass through data and make a lookup map.
 This map will basically associate each node's id to the index in the original dataset.
