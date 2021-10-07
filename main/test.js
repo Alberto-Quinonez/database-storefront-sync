@@ -1,4 +1,5 @@
 const {performance} = require('perf_hooks');
+const sampleJson = require('./sample.json');
 const sortCategoriesForInsert = require('./index.js')
 //omitting name since would be more difficult to randomize
 //they will all be undefined for test output
@@ -68,13 +69,14 @@ function shuffleArray(array) {
 function test(size){
   let treeInput = generate(size);
 
+  //to use sample file.
+  //let treeInput = sampleJson;
   let startTime = performance.now();
 
   let treeOutput = sortCategoriesForInsert(treeInput);
 
   let endTime = performance.now();
-  console.log(`ended sort`);
   console.log(`Call to sortCategoriesForInsert took ${endTime - startTime} milliseconds`);
 }
 
-test(1000);
+test(1000000);

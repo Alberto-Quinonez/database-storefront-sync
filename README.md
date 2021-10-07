@@ -4,27 +4,27 @@
 
 ### Lookup Map
 The idea here is to go with a first pass through data and make a lookup map.
-This map will basically associate each node's id to the index in the original dataset
+This map will basically associate each node's id to the index in the original dataset.
 This allows us to quickly fetch the correct element by id, removes the need to later search the dataset for a particular node.
 We also take advantage of this iteration to initialize a children array property on each node of the dataset.
 
 
 ### List of Trees
 Here we go for a second iteration through the data set, but this time with the new lookup map.
-Each iteration we either , if the value is a root parent, add to list of trees, otherwise, append the value to the children of its parent_id based on the lookup map. 
+Each iteration we either, if the value is a root parent, add to list of trees, otherwise, append the value to the children of its parent_id based on the lookup map. 
 
-On exit, we should have as many trees as there are root elements in the input dataset
+On exit, we should have as many trees as there are root elements in the input dataset.
 
 ### generate output
 Here we iterate on each tree, and do a breadth first traversal. This guarantees that in each tree, the parent nodes come out first. In order to satisfy the requirements.
 
 
 ## test.js
-This is a small test file to try to see the performance of the algorithm
+This is a small test file to try to see the performance of the algorithm.
 
 ### generate
 this simply creates equal sized trees, as many times as requested. 
-Flattens the trees into one array, then shuffles the array.
+Flattens the trees into one array, then shuffles the array for use in category sort.
 
 
 The tree generation was not ideal, it does not produce very deep trees. 

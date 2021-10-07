@@ -29,7 +29,7 @@ function createListOfTrees(inputData, indexMap) {
 //once we have our list of trees we iterate the list
 //and perform a breadth first traversal on each list.
 //I believe there may be a quicker way to do this by doing a BFS search on the entire list of trees at once.
-//To avoid doing the search on
+//To avoid doing the search on each tree one by one.
 function generateOutput(listOfTrees) {
   return listOfTrees.map((val) => getCategoryOutput(val)).flat();
 }
