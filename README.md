@@ -31,6 +31,8 @@ The tree generation was not ideal, it does not produce very deep trees.
 
 But I attempted a few cases with increasing number of trees to get an idea of the speed for sorting the categories.
 
+AMD Ryzen 5 5600x @4GHz 32GB ram @3600MHz
+
 | Input size (num of roots)   | Average time  | run 1(ms)     | run 2(ms)     |  run 3(ms)    |
 | --------------------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 |                       1000  |       5.5800  |       4.8531  |       6.9624  |       4.9247  |
@@ -39,4 +41,7 @@ But I attempted a few cases with increasing number of trees to get an idea of th
 |                     100000  |     766.6213  |     741.6397  |     777.1347  |     781.0896  |
 |                    1000000  |   21215.7688  |   20193.6161  |   22157.3526  |   21296.3377  |
 -----------------------------------------------------------------------------------------------
+
+*Update, managed to generate an input file with varying depth from 13-20 tree depth, with about 100 trees
+and speed was about 4505.9990ms. Root id is 0, not null.
 
