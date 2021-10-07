@@ -19,11 +19,17 @@ On exit, we should have as many trees as there are root elements in the input da
 Here we iterate on each tree, and do a breadth first traversal. This guarantees that in each tree, the parent nodes come out first. In order to satisfy the requirements.
 
 
-### test.js
-I created a small test file to try to see 
+## test.js
+This is a small test file to try to see the performance of the algorithm
 
-The tree generation was not ideal, I was not able to generate deep trees.
-But I attempted a few cases to get an idea of the speed for sorting the categories.
+### generate
+this simply creates equal sized trees, as many times as requested. 
+Flattens the trees into one array, then shuffles the array.
+
+
+The tree generation was not ideal, it does not produce very deep trees. 
+
+But I attempted a few cases with increasing number of trees to get an idea of the speed for sorting the categories.
 
 | Input size (num of roots)   | Average time  | run 1(ms)     | run 2(ms)     |  run 3(ms)    |
 | --------------------------- |:-------------:|:-------------:|:-------------:|:-------------:|
