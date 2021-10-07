@@ -31,11 +31,7 @@ function createListOfTrees(inputData, indexMap) {
 //I believe there may be a quicker way to do this by doing a BFS search on the entire list of trees at once.
 //To avoid doing the search on
 function generateOutput(listOfTrees) {
-  return listOfTrees
-    .map((val) => {
-      return getCategoryOutput(val);
-    })
-    .flat();
+  return listOfTrees.map((val) => getCategoryOutput(val)).flat();
 }
 
 //Since we need to get category of parents before children are inserted
